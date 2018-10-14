@@ -2,3 +2,4 @@ server/node_modules/
 *.swp
 .DS_Store
 ngrok
+.expo/

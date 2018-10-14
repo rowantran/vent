@@ -15,7 +15,7 @@ export default class MenuScreen extends React.Component {
         super(props);
         try {
             const value = AsyncStorage.getItem('jwt');
-            if (value != null) {
+            if (value != '' || value == null) {
                 this.props.navigation.navigate('Home');
             }
         } catch (err) {

@@ -28,9 +28,9 @@ export default class RegisterScreen extends React.Component {
     }
 
     sendRegistration = () => {
-        Alert.alert("User: " + this.state.username + ", email: " + 
-            this.state.email + ", pass: " + this.state.password);
-        Alert.alert(config.SERVER_URL + '/user/create');
+        //Alert.alert("User: " + this.state.username + ", email: " + 
+        //    this.state.email + ", pass: " + this.state.password);
+        //Alert.alert(config.SERVER_URL + '/user/create');
         fetch(config.SERVER_URL + '/user/create', {
             method: 'POST',
             headers: {
