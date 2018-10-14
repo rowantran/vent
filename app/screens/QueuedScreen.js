@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import * as config from '../config';
+import openSocket from 'socket.io-client';
 
 /*class JWTKey extends Component {
     constructor(params) {
@@ -23,14 +24,17 @@ import * as config from '../config';
     }
 }*/
 
+
 export default class QueuedScreen extends Component {
     constructor() {
         super();
         this.state = {
             username: '',
-            jwt: ''
+            jwt: '',
+            socket: ''
         }
 
+        this.state.socket = openSocket(config.SERVER_URL);
         this.loadLogin();
     }
 
