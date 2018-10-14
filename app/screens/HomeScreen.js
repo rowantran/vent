@@ -92,7 +92,7 @@ export default class HomeScreen extends Component {
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <View>
-                    <Text style={{ fontSize: 36 }{fontFamily: "Avenir"}{color: #33ccff}}>Welcome, {this.state.username}</Text>
+                    <Text style={{ fontSize: 36, fontFamily: "Avenir", color: '#33ccff' }}>Welcome, {this.state.username}</Text>
                     <Button onPress={() => {
                         this.props.navigation.navigate('Questionnaire');
                     }} title='Go to questionnaire' />

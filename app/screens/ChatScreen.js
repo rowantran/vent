@@ -44,6 +44,7 @@ export default class ChatScreen extends Component {
             jwt: '',
             socket: '',
             ready: false,
+            currentMessage: '',
             messages: [] 
         }
 
@@ -66,19 +67,34 @@ export default class ChatScreen extends Component {
         this.setState({ username: await AsyncStorage.getItem('username'), jwt: await AsyncStorage.getItem('jwt')});
     }
 
+    setCurrentMessage = (text) => {
+        this.setState({ currentMessage: text });
+    }
+
+    sendMessage = () => {
+        //Alert.alert(this.state.currentMessage);
+        this.state.socket.emit('message', this.state.currentMessage);
+        this.setState({ currentMessage: '' });
+    }
+
+    componentWillUnmount = () => {
+        this.state.socket.disconnect();
+    }
+
     render() {
         if (this.state.ready) {
             var renderText = [];
             for (var i = 0; i < this.state.messages.length; i++) {
                 renderText.push(
-                    <Text>{this.state.messages[i]}</Text>
+                    <Text key={i}>{this.state.messages[i]}</Text>
                 );
             }
 
             return (
                 <View>
                     {renderText}
-                    <Input placeholder='talk...' />
+                    <Input placeholder='talk...' onChangeText={this.setCurrentMessage} value={this.state.currentMessage} />
+                    <Button onPress={this.sendMessage} title='Send' />
                 </View>
             );
         } else {

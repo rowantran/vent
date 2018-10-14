@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        fontSize: 48,
+        fontSize: 42,
         color: "white",
         fontStyle: "italic",
-        fontFamily: "Optima-BoldItalic",
+        fontFamily: "Avenir",
     }
 });

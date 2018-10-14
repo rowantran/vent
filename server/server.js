@@ -34,4 +34,8 @@ io.on('connection', (socket) => {
             socket.emit('message', 'hello');
         }, 5000);
     });
+
+    socket.on('message', (msg) => {
+        socket.emit('message', msg);
+    })
 });
