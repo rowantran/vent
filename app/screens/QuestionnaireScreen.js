@@ -42,10 +42,11 @@ export default class QuestionnaireScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Question 1</Text>
+                <Text>A rumour is being spread about you by someone, are you likely to confront that person? </Text>
                 <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Question 2</Text>
+                <Text>A person has challenged you to a fight, are you likely to confront that person?
+</Text>
                 <Slider onSlidingComplete={this.setQ2} style={{width: 300}} minimumValue={1} maximumValue={5} value={1} step={2} />
 
                 <Button onPress={this.sendRegistration} title='Submit' />
