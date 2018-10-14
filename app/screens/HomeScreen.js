@@ -27,15 +27,15 @@ export default class HomeScreen extends Component {
     constructor() {
         super();
         this.state = {
-            username: ''
+            username: '',
+            jwt: ''
         }
 
-        this.loadUsername();
+        this.loadLogin();
     }
 
-    loadUsername = async () => {
-        this.state.username = await AsyncStorage.getItem('username');
-        this.setState({ username: this.state.username });
+    loadLogin = async () => {
+        this.setState({ username: await AsyncStorage.getItem('username'), jwt: await AsyncStorage.getItem('jwt')});
     }
 
     logOut = () => {
@@ -53,11 +53,39 @@ export default class HomeScreen extends Component {
     }
 
     joinAsVenter = () => {
-        Alert.alert('Venter');
+        fetch(config.SERVER_URL + '/match/join', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                jwt: this.state.jwt,
+                venter: "0"
+            })
+        })
+        .then(() => {
+            this.props.navigation.navigate('Queued');
+        });
     }
 
     joinAsListener = () => {
-        Alert.alert('Listener');
+        fetch(config.SERVER_URL + '/match/join', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                jwt: this.state.jwt,
+                venter: "1"
+            })
+        })
+        .then(() => {
+            this.props.navigation.navigate('Queued');
+        });
     }
 
     render() {
