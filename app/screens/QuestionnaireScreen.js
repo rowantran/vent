@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Slider, StyleSheet, Text, View } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { Alert, Button, Slider, StyleSheet, Text, View } from 'react-native';
+import { Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import * as config from '../config';
 
@@ -45,11 +45,34 @@ export default class QuestionnaireScreen extends React.Component {
                 <Text>A rumour is being spread about you by someone, are you likely to confront that person? </Text>
                 <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>A person has challenged you to a fight, are you likely to confront that person?
-</Text>
+                <Text>A person has challenged you to a fight, are you likely to confront that person? </Text>
                 <Slider onSlidingComplete={this.setQ2} style={{width: 300}} minimumValue={1} maximumValue={5} value={1} step={2} />
 
-                <Button onPress={this.sendRegistration} title='Submit' />
+                <Text>Someone is beating another person up, are you likely to confront that person? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Are you insecure? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Do you prefer camping, or staying at home (no for camping, yes for staying)</Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Are you religious? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Are you a moral person? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Are you good in group settings?</Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Text>Are you a social person? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                 <Text>Are you intelligent? </Text>
+                <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
+
+                <Button onPress={this.sendRegistration} title='Submit'/>
             </View>
         );
     }
