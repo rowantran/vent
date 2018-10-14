@@ -70,7 +70,7 @@ export default class RegisterScreen extends React.Component {
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     secureTextEntry={true}
                 />
-                <Button onPress={this.sendRegistration} title="Register" />
+                <Button onPress={this.sendRegistration} title='Register' />
             </View>
         );
     }

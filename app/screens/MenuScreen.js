@@ -16,7 +16,7 @@ export default class MenuScreen extends React.Component {
             <View style={styles.container}>
                 <Header name="Vent" />
                 <Button onPress={() => {
-                    Alert.alert("Pressed log in!");
+                    this.props.navigation.navigate('Login');
                 }}
                 title="Log in" />
 

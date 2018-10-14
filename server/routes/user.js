@@ -6,6 +6,8 @@ var crypto = require('crypto')
 
 const config = require('../config')
 
+var jwt = require('jsonwebtoken')
+
 var router = express.Router()
 
 // Utility function
@@ -27,10 +29,13 @@ router.post('/create', function (req, res, next) {
             res.sendStatus(500);
         } else {
             writeLog('Successfully generated salt');
-            let salt = buf.toString('hex')
+
+            let salt = buf.toString('hex');
+
             let hmac = new crypto.createHmac('sha256', buf.toString('hex'));
             hmac.update(req.body.password);
             let hmacHash = hmac.digest('hex');
+
             req.app.get('db').run('INSERT INTO users VALUES (null, ?, ?, ?, ?, 0)', req.body.username, hmacHash,
                 salt, req.body.email, (err) => {
                     if (!err) {
@@ -42,6 +47,34 @@ router.post('/create', function (req, res, next) {
                     }
                 }
             );
+        }
+    });
+});
+
+router.post('/login', function (req, res, next) {
+    req.app.get('db').get('SELECT * FROM users WHERE username = ?', req.body.username, (err, row) => {
+        if (!err) {
+            if (row) {
+                writeLog('Found user ' + req.body.username);
+
+                let hmac = new crypto.createHmac('sha256', row.salt);
+                hmac.update(req.body.password);
+                let givenHash = hmac.digest('hex');
+
+                if (row.hmac == givenHash) {
+                    writeLog('Correct password for user ' + req.body.username);
+                    let token = jwt.sign({ id: row.u_id }, config.secret);
+                    res.status(200).send(JSON.stringify({ jwt: token }));
+                } else {
+                    res.sendStatus(401);
+                }
+            } else {
+                writeLog('Invalid user ' + req.body.username);
+                res.sendStatus(404);
+            }
+        } else {
+            writeLog('Error logging in user');
+            res.sendStatus(500);
         }
     });
 });
