@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
 import * as config from '../config';
 
@@ -39,6 +39,11 @@ export default class LoginScreen extends Component {
             if (response.status == 200) {
                 response.json().then((responseJson) => {
                     Alert.alert('Got JWT: ' + responseJson.jwt);
+                    try {
+                        AsyncStorage.setItem('jwt', responseJson.jwt);
+                    } catch (err) {
+                        Alert.alert('Error');
+                    }
                 });
             }
         })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 class Header extends Component {
@@ -11,6 +11,18 @@ class Header extends Component {
 }
 
 export default class MenuScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        try {
+            const value = AsyncStorage.getItem('jwt');
+            if (value != null) {
+                this.props.navigation.navigate('Home');
+            }
+        } catch (err) {
+            Alert.alert(err);
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
