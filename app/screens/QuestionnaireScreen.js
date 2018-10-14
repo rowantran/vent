@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Button, Slider, StyleSheet, Text, View } from 'react-native';
-import { Input } from 'react-native-elements';
+import { Alert, Slider, StyleSheet, Text, View } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import * as config from '../config';
 

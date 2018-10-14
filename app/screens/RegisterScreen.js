@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
-import { Input } from 'react-native-elements';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import * as config from '../config';
 
@@ -42,7 +42,10 @@ export default class RegisterScreen extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             })
-        });
+        })
+            .then(() => {
+                this.props.navigation.navigate('Login');
+            });
     }
 
     render() {
