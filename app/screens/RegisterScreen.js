@@ -13,6 +13,7 @@ export default class RegisterScreen extends React.Component {
         };
     }
 
+    // Called when username field changes, store the username in this.state 
     setUsername = (text) => {
         this.setState({ username: text });
     }
@@ -42,7 +43,7 @@ export default class RegisterScreen extends React.Component {
                 <Input
                     placeholder='Password'
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    secureTextEntry={true}
+                    secureTextEntry={true} // Don't show typed text in field
                     onChangeText={this.setPassword}
                 />
                 <Input
