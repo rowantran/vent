@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
-import { Input } from 'react-native-elements';
+import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 import * as config from '../config';
 
 export default class LoginScreen extends Component {
@@ -23,7 +23,8 @@ export default class LoginScreen extends Component {
     sendLogin = () => {
         //Alert.alert("User: " + this.state.username + ", password: " + this.state.password);
         //Alert.alert(config.SERVER_URL + '/user/login');
-        Alert.alert(JSON.stringify({username: this.state.username}));
+        //Alert.alert(JSON.stringify({username: this.state.username}));
+        AsyncStorage.setItem('username', this.state.username);
         fetch(config.SERVER_URL + '/user/login', {
             method: 'POST',
             headers: {
@@ -36,12 +37,15 @@ export default class LoginScreen extends Component {
             })
         })
         .then((response) => {
-            Alert.alert('Status ' + response.status);
+            //Alert.alert('Status ' + response.status);
             if (response.status == 200) {
                 response.json().then((responseJson) => {
-                    Alert.alert('Got JWT: ' + responseJson.jwt);
+                    //Alert.alert('Got JWT: ' + responseJson.jwt);
                     try {
-                        AsyncStorage.setItem('jwt', responseJson.jwt);
+                        AsyncStorage.setItem('jwt', responseJson.jwt)
+                            .then(() => {
+                                this.props.navigation.navigate('Home');
+                            });
                     } catch (err) {
                         Alert.alert('Error');
                     }

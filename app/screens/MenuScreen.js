@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 
 class Header extends Component {
@@ -11,16 +12,20 @@ class Header extends Component {
 }
 
 export default class MenuScreen extends React.Component {
-    constructor(props) {
-        super(props);
+    checkLoggedIn = async () => {
         try {
-            const value = AsyncStorage.getItem('jwt');
-            if (value != '' || value == null) {
+            const value = await AsyncStorage.getItem('jwt');
+            if (value != null) {
                 this.props.navigation.navigate('Home');
             }
         } catch (err) {
             Alert.alert(err);
         }
+    }
+
+    constructor(props) {
+        super(props);
+        this.checkLoggedIn();
     }
 
     render() {
@@ -29,11 +34,13 @@ export default class MenuScreen extends React.Component {
                 <Header name="Vent" />
                 <Button onPress={() => {
                     this.props.navigation.navigate('Login');
+                    this.componentWillUnmount();
                 }}
-                title="Log in" />
+                title="Log in" margin={10} />
 
                 <Button onPress={() => {
                     this.props.navigation.navigate('Register');
+                    this.componentWillUnmount();
                 }}
                 title="Register" />
             </View>
