@@ -90,6 +90,26 @@ router.put('/questionnaire', function (req, res, next) {
     });
 });
 
+router.put('/questionnaire/completed', (req, res) => {
+    let user = req.body.username;
+    writeLog('Checking questionnaire completion for user ' + user);
+    req.app.get('db').get('SELECT * FROM users WHERE username = ?', user, (err, row) => {
+        if (!err) {
+            if (row) {
+                if (row.q1 == null) {
+                    res.status(200).send(JSON.stringify({ completed: false }));
+                } else {
+                    res.status(200).send(JSON.stringify({ completed: true }));
+                }
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            res.sendStatus(500);
+        }
+    })
+})
+
 router.post('/login', function (req, res, next) {
     req.app.get('db').get('SELECT * FROM users WHERE username = ?', req.body.username, (err, row) => {
         if (!err) {

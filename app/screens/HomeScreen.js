@@ -28,14 +28,38 @@ export default class HomeScreen extends Component {
         super();
         this.state = {
             username: '',
-            jwt: ''
+            jwt: '',
+            questionnaireCompleted: false,
         }
 
-        this.loadLogin();
+        this.loadLogin(() => this.checkQuestionnaireCompleted());
     }
 
-    loadLogin = async () => {
+    loadLogin = async (cb) => {
         this.setState({ username: await AsyncStorage.getItem('username'), jwt: await AsyncStorage.getItem('jwt')});
+        cb();
+    }
+
+    checkQuestionnaireCompleted = () => {
+        fetch(config.SERVER_URL + '/user/questionnaire/completed', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username
+            })
+        })
+        .then((response) => {
+            if (response.status == 200) {
+                response.json().then((resJson) => {
+                    if (resJson.completed = 'true') {
+                        this.setState({ questionnaireCompleted: true });
+                    }
+                })
+            }
+        });
     }
 
     logOut = () => {
@@ -89,20 +113,35 @@ export default class HomeScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <View>
-                    <Text style={{ fontSize: 36, fontFamily: "Avenir", color: '#33ccff' }}>Welcome, {this.state.username}</Text>
-                    <Button onPress={() => {
-                        this.props.navigation.navigate('Questionnaire');
-                    }} title='Go to questionnaire' />
-                    <Button onPress={this.joinAsVenter} title='Vent' />
-                    <Button onPress={this.joinAsListener} title='Listen' />
+        if (this.state.questionnaireCompleted) {
+            return (
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <View>
+                        <Text style={{ fontSize: 36, fontFamily: "Avenir", color: '#33ccff' }}>Welcome, {this.state.username}</Text>
+                        <Button onPress={this.joinAsVenter} title='Vent' />
+                        <Button onPress={this.joinAsListener} title='Listen' />
+                    </View>
+                    <View>
+                        <Button style={{position: 'absolute', bottom: -200, right: -170 }}onPress={this.logOut} title='Log out' />
+                    </View>
                 </View>
-                <View>
-                    <Button style={{position: 'absolute', bottom: -200, right: -170 }}onPress={this.logOut} title='Log out' />
+            );
+        } else {
+            return (
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <View>
+                        <Text style={{ fontSize: 36, fontFamily: "Avenir", color: '#33ccff' }}>Welcome, {this.state.username}</Text>
+                        <Button onPress={() => {
+                            this.props.navigation.navigate('Questionnaire');
+                        }} title='Go to questionnaire' />
+                        <Button onPress={this.joinAsVenter} title='Vent' />
+                        <Button onPress={this.joinAsListener} title='Listen' />
+                    </View>
+                    <View>
+                        <Button style={{position: 'absolute', bottom: -200, right: -170 }}onPress={this.logOut} title='Log out' />
+                    </View>
                 </View>
-            </View>
-        );
+            );
+        }
     }
 }
