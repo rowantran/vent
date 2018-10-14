@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import * as config from '../config';
+import openSocket from 'socket.io-client';
 
 /*class JWTKey extends Component {
     constructor(params) {
@@ -23,15 +24,35 @@ import * as config from '../config';
     }
 }*/
 
+class LoadingText extends Component {
+    render() {
+        if (!this.state.ready) {
+            return (
+                <Text>Waiting...</Text>
+            );
+        } else {
+            return '';
+        }
+    }
+}
+
 export default class QueuedScreen extends Component {
     constructor() {
         super();
         this.state = {
             username: '',
-            jwt: ''
+            jwt: '',
+            socket: '',
+            ready: false,
         }
 
+        this.state.socket = openSocket(config.SERVER_URL);
         this.loadLogin();
+
+        this.state.socket.emit('enter', 'enter');
+        this.state.socket.on('ready', (msg) => {
+            this.setState( {ready: true});
+        });
     }
 
     loadLogin = async () => {
@@ -39,10 +60,14 @@ export default class QueuedScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={{ fontSize: 36 }}>Waiting...</Text>
-            </View>
-        );
+        if (this.state.ready) {
+            return '';
+        } else {
+            return (
+                <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{ fontSize: 36 }}>Waiting...</Text>
+                </View>
+            );
+        }
     }
 }
