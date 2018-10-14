@@ -4,22 +4,46 @@ import { Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 
 export default class RegisterScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            password: ''
+        };
+    }
+
+    setUsername = (text) => {
+        this.setState({ username: text });
+    }
+
+    setEmail = (text) => {
+        this.setState({ email: text });
+    }
+
+    setPassword = (text) => {
+        this.setState({ password: text });
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Input
                     placeholder='Username'
                     leftIcon={{ type: 'font-awesome', name: 'user' }}
+                    onChangeText={this.setUsername}
                 />
                 <Input
                     placeholder='Email'
                     leftIcon={{ type: 'font-awesome', name: 'envelope-open' }}
                     keyboardType='email-address'
+                    onChangeText={this.setEmail}
                 />
                 <Input
                     placeholder='Password'
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     secureTextEntry={true}
+                    onChangeText={this.setPassword}
                 />
                 <Input
                     placeholder='Confirm password'
@@ -27,7 +51,8 @@ export default class RegisterScreen extends React.Component {
                     secureTextEntry={true}
                 />
                 <Button onPress={() => {
-                    Alert.alert("Registered.");
+                    Alert.alert("Registered." + this.state.username + " " +
+                    this.state.password + " " + this.state.email);
                 }}
                 title="Register" />
             </View>
