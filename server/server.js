@@ -27,14 +27,22 @@ app.use('/match', match);
 
 http.listen(config.port, () => console.log(`Listening on port ${config.port}`))
 
+var users = [];
 io.on('connection', (socket) => {
-    socket.on('enter', (interval) => {
+    socket.on('enter', (username) => {
+        users.push(username);
         setInterval(() => {
-            socket.emit('ready', '1');
-        }, 5000);
+            if (users.length > 1) {
+                socket.emit('ready', 'ssdsI-41');
+            }
+        }, 1000);
     });
 
     socket.on('message', (msg) => {
-        socket.emit('message', msg);
-    })
+        io.emit('message', msg, { for: 'everyone' });
+    });
+
+    socket.on('disconnect', (reason) => {
+        console.log('User left');
+    });
 });

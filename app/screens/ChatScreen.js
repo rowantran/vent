@@ -49,8 +49,10 @@ export default class ChatScreen extends Component {
         }
 
         this.state.socket = openSocket(config.SERVER_URL);
-        this.loadLogin();
+        this.loadLogin(() => this.connectSocket());
+    }
 
+    connectSocket = () => {
         this.state.socket.emit('enter', 'enter');
         this.state.socket.on('ready', (msg) => {
             this.setState( {ready: true});
@@ -61,10 +63,12 @@ export default class ChatScreen extends Component {
             currentMessages.push(msg);
             this.setState({ messages: currentMessages });
         })
+
     }
 
-    loadLogin = async () => {
+    loadLogin = async (cb) => {
         this.setState({ username: await AsyncStorage.getItem('username'), jwt: await AsyncStorage.getItem('jwt')});
+        cb();
     }
 
     setCurrentMessage = (text) => {

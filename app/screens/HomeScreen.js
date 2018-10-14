@@ -79,7 +79,7 @@ export default class HomeScreen extends Component {
     }
 
     joinAsVenter = () => {
-        fetch(config.SERVER_URL + '/match/join', {
+        /*fetch(config.SERVER_URL + '/match/join', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -93,11 +93,12 @@ export default class HomeScreen extends Component {
         })
         .then(() => {
             this.props.navigation.navigate('Chat');
-        });
+        });*/
+        this.props.navigation.navigate('Chat', { venter: 1 });
     }
 
     joinAsListener = () => {
-        fetch(config.SERVER_URL + '/match/join', {
+        /*fetch(config.SERVER_URL + '/match/join', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -111,7 +112,8 @@ export default class HomeScreen extends Component {
         })
         .then(() => {
             this.props.navigation.navigate('Chat');
-        });
+        });*/
+        this.props.navigation.navigate('Chat', { venter: 0 });
     }
 
     componentDidMount = () => {
