@@ -45,13 +45,13 @@ export default class MenuScreen extends React.Component {
                         this.props.navigation.navigate('Login');
                         this.componentWillUnmount();
                     }}
-                    title="Log in" margin={10} />
+                    title="Log in" style={styles.button} /> 
 
                     <Button onPress={() => {
                         this.props.navigation.navigate('Register');
                         this.componentWillUnmount();
                     }}
-                    title="Register" />
+                    title="Register" style={styles.button} /> 
                 </View>
             </ImageBackground>
         );
@@ -72,5 +72,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontFamily: "Avenir",
         textAlign: 'center'
+    },
+    button: {
+        width: 200,
+        backgroundColor: '#0097d8'
     }
 });

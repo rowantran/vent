@@ -25,8 +25,18 @@ const RootStack = createStackNavigator(
                 title: `Register`
             }),
         },
-        Questionnaire: QuestionnaireScreen,
-        Chat: ChatScreen 
+        Questionnaire: {
+            screen: QuestionnaireScreen,
+            navigationOptions: () => ({
+                title: `Profile survey`
+            }),
+        },
+        Chat: {
+            screen: ChatScreen ,
+            navigationOptions: () => ({
+                title: `Chat`
+            }),
+        },
     },
     {
         initialRouteName: 'Menu',

@@ -24,6 +24,20 @@ import openSocket from 'socket.io-client';
     }
 }*/
 
+class ChatMessage extends Component {
+    render() {
+        if (this.props.username == this.props.myUsername) { 
+            return (
+                <Text style={styles.chatmessage}>{this.props.username}: {this.props.text}</Text>
+            )        
+        } else {
+            return (
+                <Text style={styles.chatmessageother}>{this.props.username}: {this.props.text}</Text>
+            )
+        }
+    }
+}
+
 class LoadingText extends Component {
     render() {
         if (!this.state.ready) {
@@ -77,7 +91,10 @@ export default class ChatScreen extends Component {
 
     sendMessage = () => {
         //Alert.alert(this.state.currentMessage);
-        this.state.socket.emit('message', this.state.currentMessage);
+        this.state.socket.emit('message', JSON.stringify({
+            msg: this.state.currentMessage,
+            username: this.state.username
+        }));
         this.setState({ currentMessage: '' });
     }
 
@@ -89,16 +106,19 @@ export default class ChatScreen extends Component {
         if (this.state.ready) {
             var renderText = [];
             for (var i = 0; i < this.state.messages.length; i++) {
+                var msgObject = JSON.parse(this.state.messages[i]);
                 renderText.push(
-                    <Text key={i}>{this.state.messages[i]}</Text>
+                    <ChatMessage key={i} text={msgObject.msg} username={msgObject.username} myUsername={this.state.username} />
                 );
             }
 
             return (
-                <View>
+                <View style={styles.root}>
                     {renderText}
-                    <Input placeholder='talk...' onChangeText={this.setCurrentMessage} value={this.state.currentMessage} />
-                    <Button onPress={this.sendMessage} title='Send' />
+                    <View style={styles.form}>
+                        <Input placeholder='talk...' onChangeText={this.setCurrentMessage} value={this.state.currentMessage} />
+                        <Button onPress={this.sendMessage} title='Send' />
+                    </View>
                 </View>
             );
         } else {
@@ -110,3 +130,24 @@ export default class ChatScreen extends Component {
         }
     }
 }
+
+const styles = StyleSheet.create({
+    root: {
+        paddingBottom: 50,
+        width: '100%',
+        height: '100%'
+    },
+    form: {
+        backgroundColor: '#fff',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
+    },
+    chatmessage: {
+        padding: 5,
+    },
+    chatmessageother: {
+        padding: 5,
+        color: '#0097d8'
+    }
+});

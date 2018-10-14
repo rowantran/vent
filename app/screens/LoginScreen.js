@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import * as config from '../config';
 
@@ -59,29 +59,33 @@ export default class LoginScreen extends Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<Input
-					placeholder='Username'
-					leftIcon={{ type: 'font-awesome', name: 'user' }}
-					onChangeText={this.setUsername}	
-				/>
-				<Input
-					placeholder='Password'
-					leftIcon={{ type: 'font-awesome', name: 'lock' }}
-					secureTextEntry={true}
-					onChangeText={this.setPassword}
-				/>
-                <Button onPress={this.sendLogin} title='Log in' />	
-            </View>
-		);
+            <ImageBackground source={{uri: 'https://hdwallsource.com/img/2014/9/gradient-26041-26726-hd-wallpapers.jpg'}} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.container}>
+                    <Input
+                        placeholder='Username'
+                        leftIcon={{ type: 'font-awesome', name: 'user' }}
+                        onChangeText={this.setUsername}	
+                    />
+                    <Input
+                        placeholder='Password'
+                        leftIcon={{ type: 'font-awesome', name: 'lock' }}
+                        secureTextEntry={true}
+                        onChangeText={this.setPassword}
+                    />
+                    <Button onPress={this.sendLogin} title='Log in' style={styles.button} />	
+                </View>
+            </ImageBackground>
+        );
 	}
 }
 
 const styles = StyleSheet.create({                                                                        
     container: {                                                                                          
         flex: 1,                                                                                          
-        backgroundColor: '#fff',                                                                          
         alignItems: 'center',                                                                             
         justifyContent: 'center',                                                                         
-	}
+    },
+    button: {
+        width: '100%'
+    }
 });

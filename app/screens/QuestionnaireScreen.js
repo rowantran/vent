@@ -100,31 +100,31 @@ export default class QuestionnaireScreen extends Component {
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
-                <Text>A rumour is being spread about you by someone, are you likely to confront that person? </Text>
+                <Text>A rumour is being spread about you by someone. How likely are you to confront them? </Text>
                 <Slider onSlidingComplete={this.setQ1} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>A person has challenged you to a fight, are you likely to confront that person? </Text>
-                <Slider onSlidingComplete={this.setQ2} style={{width: 300}} minimumValue={1} maximumValue={5} value={1} step={2} />
+                <Text>A person has challenged you to a fight. How likely are you to accept the challenge? </Text>
+                <Slider onSlidingComplete={this.setQ2} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Someone is beating another person up, are you likely to confront that person? </Text>
+                <Text>Someone is beating another person up. How likely are you to intervene? </Text>
                 <Slider onSlidingComplete={this.setQ3} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
                 <Text>Are you insecure? </Text>
                 <Slider onSlidingComplete={this.setQ4} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Do you prefer camping, or staying at home (no for camping, yes for staying)</Text>
+                <Text>How much do you enjoy spending time in the outdoors?</Text>
                 <Slider onSlidingComplete={this.setQ5} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Are you religious? </Text>
+                <Text>How religious are you?</Text>
                 <Slider onSlidingComplete={this.setQ6} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Are you a moral person? </Text>
+                <Text>How likely would you be to lie to help a friend? </Text>
                 <Slider onSlidingComplete={this.setQ7} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Are you good in group settings?</Text>
+                <Text>How comfortable do you feel speaking to an audience?</Text>
                 <Slider onSlidingComplete={this.setQ8} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
-                <Text>Are you a social person? </Text>
+                <Text>In a crowded party, how social are you?</Text>
                 <Slider onSlidingComplete={this.setQ9} style={{width: 300}} minimumValue={1} maximumValue={5} value={3} step={1} />
 
                 <Text>How comfortable are you speaking to strangers?</Text>
