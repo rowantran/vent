@@ -6,7 +6,11 @@ import { createStackNavigator } from 'react-navigation';
 class Header extends Component {
     render() {
         return (
-            <Text style={styles.header}>Welcome to {this.props.name}</Text>
+            <Text style={styles.titleText}>
+            <Text style={{color: 'red'}}>
+            Welcome to {this.props.name}
+            </Text>
+            </Text>
         );
     }
 }
@@ -43,6 +47,10 @@ export default class MenuScreen extends React.Component {
                     this.componentWillUnmount();
                 }}
                 title="Register" />
+                <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+                <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}} /> 
+                <View style={{width: 150, height: 150, backgroundColor: 'steelblue'}} />
+
             </View>
 
         );
@@ -52,7 +60,7 @@ export default class MenuScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'skyblue',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
