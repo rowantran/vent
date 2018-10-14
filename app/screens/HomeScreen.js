@@ -90,14 +90,18 @@ export default class HomeScreen extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={{ fontSize: 36 }}>Welcome, {this.state.username}</Text>
-                <Button onPress={() => {
-                    this.props.navigation.navigate('Questionnaire');
-                }} title='Go to questionnaire' />
-                <Button onPress={this.joinAsVenter} title='Vent' />
-                <Button onPress={this.joinAsListener} title='Listen' />
-                <Button onPress={this.logOut} title='Log out' />
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <View>
+                    <Text style={{ fontSize: 36 }}>Welcome, {this.state.username}</Text>
+                    <Button onPress={() => {
+                        this.props.navigation.navigate('Questionnaire');
+                    }} title='Go to questionnaire' />
+                    <Button onPress={this.joinAsVenter} title='Vent' />
+                    <Button onPress={this.joinAsListener} title='Listen' />
+                </View>
+                <View>
+                    <Button style={{position: 'absolute', bottom: -200, right: -170 }}onPress={this.logOut} title='Log out' />
+                </View>
             </View>
         );
     }

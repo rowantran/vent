@@ -61,11 +61,15 @@ export default class QueuedScreen extends Component {
 
     render() {
         if (this.state.ready) {
-            return '';
+            return (
+                <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{ fontSize: 36 }}>matched!</Text>
+                </View>
+            ) 
         } else {
             return (
                 <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{ fontSize: 36 }}>Waiting...</Text>
+                    <Text style={{ fontSize: 36 }}>waiting...</Text>
                 </View>
             );
         }
