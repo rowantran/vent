@@ -12,6 +12,7 @@ const config = require('./config')
 var db = new sqlite3.Database(config.DB_FILE)
 
 var user = require('./routes/user')
+var match = require('./routes/match')
 
 const app = express()
 app.set('db', db)
@@ -19,5 +20,6 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('hello'))
 app.use('/user', user)
+app.use('/match', match);
 
 app.listen(config.port, () => console.log(`Listening on port ${config.port}`))

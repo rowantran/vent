@@ -43,10 +43,6 @@ export default class MenuScreen extends React.Component {
                     this.componentWillUnmount();
                 }}
                 title="Register" />
-                <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-                <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}} /> 
-                <View style={{width: 150, height: 150, backgroundColor: 'steelblue'}} />
-
             </View>
 
         );
@@ -56,7 +52,7 @@ export default class MenuScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'skyblue',
         alignItems: 'center',
         justifyContent: 'center',
     },

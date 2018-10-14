@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { AsyncStorage, Button, Slider, StyleSheet, Text, ScrollView } from 'react-native';
-import { Input } from 'react-native-elements';
-import { createStackNavigator } from 'react-navigation';
 import * as config from '../config';
 
-export default class QuestionnaireScreen extends React.Component {
+export default class QuestionnaireScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {

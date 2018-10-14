@@ -52,6 +52,14 @@ export default class HomeScreen extends Component {
         });
     }
 
+    joinAsVenter = () => {
+        Alert.alert('Venter');
+    }
+
+    joinAsListener = () => {
+        Alert.alert('Listener');
+    }
+
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
@@ -59,6 +67,8 @@ export default class HomeScreen extends Component {
                 <Button onPress={() => {
                     this.props.navigation.navigate('Questionnaire');
                 }} title='Go to questionnaire' />
+                <Button onPress={this.joinAsVenter} title='Vent' />
+                <Button onPress={this.joinAsListener} title='Listen' />
                 <Button onPress={this.logOut} title='Log out' />
             </View>
         );

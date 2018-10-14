@@ -16,3 +16,10 @@ CREATE TABLE users (
     q9 INTEGER,
     q10 INTEGER
 );
+
+CREATE TABLE pool (
+    entry_id INTEGER PRIMARY KEY,
+    venter INTEGER,
+    u_id INTEGER,
+    FOREIGN KEY(u_id) REFERENCES users(u_id)
+);
