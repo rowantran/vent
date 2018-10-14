@@ -121,6 +121,6 @@ export default class QuestionnaireScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        margin: 20
+        padding: 20
     }
 });
