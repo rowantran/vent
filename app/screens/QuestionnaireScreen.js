@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, Slider, StyleSheet, Text, ScrollView } from 'react-native';
+import { AsyncStorage, Button, Slider, StyleSheet, Text, ScrollView } from 'react-native';
 import { Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import * as config from '../config';
@@ -8,6 +8,8 @@ export default class QuestionnaireScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            username: '',
+            jwt: '',
             q1: 3,
             q2: 3,
             q3: 3,
@@ -19,22 +21,37 @@ export default class QuestionnaireScreen extends React.Component {
             q9: 3,
             q10: 3
         };
+
+        this.loadLogin();
+    }
+
+    loadLogin = async () => {
+        this.setState({ username: await AsyncStorage.getItem('username'), jwt: await AsyncStorage.getItem('jwt')});
     }
 
     sendRegistration = () => {
         //Alert.alert("User: " + this.state.username + ", email: " + 
         //    this.state.email + ", pass: " + this.state.password);
         //Alert.alert(config.SERVER_URL + '/user/create');
-        fetch(config.SERVER_URL + '/user/create', {
-            method: 'POST',
+        fetch(config.SERVER_URL + '/user/questionnaire', {
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
+                jwt: this.state.jwt,
+                q1: this.state.q1,
+                q2: this.state.q2,
+                q3: this.state.q3,
+                q4: this.state.q4,
+                q5: this.state.q5,
+                q6: this.state.q6,
+                q7: this.state.q7,
+                q8: this.state.q8,
+                q9: this.state.q9,
+                q10: this.state.q10
             })
         });
     }
