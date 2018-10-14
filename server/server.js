@@ -28,5 +28,9 @@ app.use('/match', match);
 http.listen(config.port, () => console.log(`Listening on port ${config.port}`))
 
 io.on('connection', (socket) => {
-    console.log('User connected');
+    socket.on('enter', (interval) => {
+        setInterval(() => {
+            socket.emit('ready', '1');
+        }, 5000);
+    });
 });

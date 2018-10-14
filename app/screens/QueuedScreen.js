@@ -24,6 +24,17 @@ import openSocket from 'socket.io-client';
     }
 }*/
 
+class LoadingText extends Component {
+    render() {
+        if (!this.state.ready) {
+            return (
+                <Text>Waiting...</Text>
+            );
+        } else {
+            return '';
+        }
+    }
+}
 
 export default class QueuedScreen extends Component {
     constructor() {
@@ -31,11 +42,17 @@ export default class QueuedScreen extends Component {
         this.state = {
             username: '',
             jwt: '',
-            socket: ''
+            socket: '',
+            ready: false,
         }
 
         this.state.socket = openSocket(config.SERVER_URL);
         this.loadLogin();
+
+        this.state.socket.emit('enter', 'enter');
+        this.state.socket.on('ready', (msg) => {
+            this.setState( {ready: true});
+        });
     }
 
     loadLogin = async () => {
@@ -43,10 +60,14 @@ export default class QueuedScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <Text style={{ fontSize: 36 }}>Waiting...</Text>
-            </View>
-        );
+        if (this.state.ready) {
+            return '';
+        } else {
+            return (
+                <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{ fontSize: 36 }}>Waiting...</Text>
+                </View>
+            );
+        }
     }
 }
