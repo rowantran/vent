@@ -66,7 +66,7 @@ export default class HomeScreen extends Component {
             })
         })
         .then(() => {
-            this.props.navigation.navigate('Queued');
+            this.props.navigation.navigate('Chat');
         });
     }
 
@@ -84,7 +84,7 @@ export default class HomeScreen extends Component {
             })
         })
         .then(() => {
-            this.props.navigation.navigate('Queued');
+            this.props.navigation.navigate('Chat');
         });
     }
 

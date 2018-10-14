@@ -36,7 +36,7 @@ class LoadingText extends Component {
     }
 }
 
-export default class QueuedScreen extends Component {
+export default class ChatScreen extends Component {
     constructor() {
         super();
         this.state = {
@@ -44,6 +44,7 @@ export default class QueuedScreen extends Component {
             jwt: '',
             socket: '',
             ready: false,
+            messages: [] 
         }
 
         this.state.socket = openSocket(config.SERVER_URL);
@@ -53,6 +54,12 @@ export default class QueuedScreen extends Component {
         this.state.socket.on('ready', (msg) => {
             this.setState( {ready: true});
         });
+
+        this.state.socket.on('message', (msg) => {
+            const currentMessages = this.state.messages;
+            currentMessages.push(msg);
+            this.setState({ messages: currentMessages });
+        })
     }
 
     loadLogin = async () => {
@@ -61,11 +68,19 @@ export default class QueuedScreen extends Component {
 
     render() {
         if (this.state.ready) {
+            var renderText = [];
+            for (var i = 0; i < this.state.messages.length; i++) {
+                renderText.push(
+                    <Text>{this.state.messages[i]}</Text>
+                );
+            }
+
             return (
-                <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{ fontSize: 36 }}>matched!</Text>
+                <View>
+                    {renderText}
+                    <Input placeholder='talk...' />
                 </View>
-            ) 
+            );
         } else {
             return (
                 <View style={{flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>

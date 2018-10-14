@@ -31,6 +31,7 @@ io.on('connection', (socket) => {
     socket.on('enter', (interval) => {
         setInterval(() => {
             socket.emit('ready', '1');
+            socket.emit('message', 'hello');
         }, 5000);
     });
 });

@@ -7,7 +7,7 @@ import MenuScreen from './screens/MenuScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import QuestionnaireScreen from './screens/QuestionnaireScreen';
-import QueuedScreen from './screens/QueuedScreen';
+import ChatScreen from './screens/ChatScreen';
 
 const RootStack = createStackNavigator(
     {
@@ -16,7 +16,7 @@ const RootStack = createStackNavigator(
         Login: LoginScreen,
         Register: RegisterScreen,
         Questionnaire: QuestionnaireScreen,
-        Queued: QueuedScreen
+        Chat: ChatScreen 
     },
     {
         initialRouteName: 'Menu',
