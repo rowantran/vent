@@ -3,6 +3,7 @@
 //
 const express = require('express')
 var sqlite3 = require('sqlite3').verbose()
+var bodyParser = require('body-parser')
 
 const config = require('./config')
 
@@ -13,6 +14,7 @@ var user = require('./routes/user')
 
 const app = express()
 app.set('db', db)
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('hello'))
 app.use('/user', user)

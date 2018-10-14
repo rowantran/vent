@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
+import * as config from '../config';
 
 export default class RegisterScreen extends React.Component {
     constructor(props) {
@@ -24,6 +25,24 @@ export default class RegisterScreen extends React.Component {
 
     setPassword = (text) => {
         this.setState({ password: text });
+    }
+
+    sendRegistration = () => {
+        Alert.alert("User: " + this.state.username + ", email: " + 
+            this.state.email + ", pass: " + this.state.password);
+        Alert.alert(config.SERVER_URL + '/user/create');
+        fetch(config.SERVER_URL + '/user/create', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            })
+        });
     }
 
     render() {
@@ -51,11 +70,7 @@ export default class RegisterScreen extends React.Component {
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     secureTextEntry={true}
                 />
-                <Button onPress={() => {
-                    Alert.alert("Registered." + this.state.username + " " +
-                    this.state.password + " " + this.state.email);
-                }}
-                title="Register" />
+                <Button onPress={this.sendRegistration} title="Register" />
             </View>
         );
     }
