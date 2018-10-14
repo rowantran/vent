@@ -54,8 +54,10 @@ export default class HomeScreen extends Component {
         .then((response) => {
             if (response.status == 200) {
                 response.json().then((resJson) => {
-                    if (resJson.completed = 'true') {
+                    if (resJson.completed == 'true') {
                         this.setState({ questionnaireCompleted: true });
+                    } else {
+                        this.props.navigation.navigate('Questionnaire');
                     }
                 })
             }
@@ -110,6 +112,10 @@ export default class HomeScreen extends Component {
         .then(() => {
             this.props.navigation.navigate('Chat');
         });
+    }
+
+    componentDidMount = () => {
+        this.checkQuestionnaireCompleted();
     }
 
     render() {

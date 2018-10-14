@@ -97,9 +97,11 @@ router.put('/questionnaire/completed', (req, res) => {
         if (!err) {
             if (row) {
                 if (row.q1 == null) {
-                    res.status(200).send(JSON.stringify({ completed: false }));
+                    writeLog('User ' + user + ' has not completed questionnaire');
+                    res.status(200).send(JSON.stringify({ completed: 'false' }));
                 } else {
-                    res.status(200).send(JSON.stringify({ completed: true }));
+                    writeLog('User ' + user + ' has completed questionnaire');
+                    res.status(200).send(JSON.stringify({ completed: 'true' }));
                 }
             } else {
                 res.sendStatus(404);

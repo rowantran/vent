@@ -51,6 +51,9 @@ export default class QuestionnaireScreen extends Component {
                 q9: this.state.q9,
                 q10: this.state.q10
             })
+        })
+        .then(() => {
+            this.props.navigation.navigate('Home');
         });
     }
 
