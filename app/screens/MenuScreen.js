@@ -65,6 +65,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        fontSize: 36
+        fontSize: 50
+        fontStyle: "italic"
+        fontFamily: Optima-BoldItalic
+
+
     }
 });
