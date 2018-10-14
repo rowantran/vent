@@ -18,8 +18,15 @@ const app = express()
 app.set('db', db)
 app.use(bodyParser.json());
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 app.get('/', (req, res) => res.send('hello'))
 app.use('/user', user)
 app.use('/match', match);
 
-app.listen(config.port, () => console.log(`Listening on port ${config.port}`))
+http.listen(config.port, () => console.log(`Listening on port ${config.port}`))
+
+io.on('connection', (socket) => {
+    console.log('User connected');
+});

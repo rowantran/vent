@@ -6,10 +6,8 @@ import { createStackNavigator } from 'react-navigation';
 class Header extends Component {
     render() {
         return (
-            <Text style={styles.titleText}>
-            <Text style={{color: 'red'}}>
+            <Text style={styles.header}>
             Welcome to {this.props.name}
-            </Text>
             </Text>
         );
     }
