@@ -23,6 +23,7 @@ export default class LoginScreen extends Component {
     sendLogin = () => {
         //Alert.alert("User: " + this.state.username + ", password: " + this.state.password);
         //Alert.alert(config.SERVER_URL + '/user/login');
+        Alert.alert(JSON.stringify({username: this.state.username}));
         fetch(config.SERVER_URL + '/user/login', {
             method: 'POST',
             headers: {

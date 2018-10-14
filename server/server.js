@@ -10,6 +10,7 @@ const config = require('./config')
 // Initialization
 // =========================================
 var db = new sqlite3.Database(config.DB_FILE)
+
 var user = require('./routes/user')
 
 const app = express()
