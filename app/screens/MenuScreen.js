@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, AsyncStorage, StyleSheet, Text, View } from 'react-native';
+import { Alert, AsyncStorage, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 
@@ -7,13 +7,19 @@ class Header extends Component {
     render() {
         return (
             <Text style={styles.header}>
-            Welcome to {this.props.name}
+            {this.props.name}
             </Text>
         );
     }
 }
 
 export default class MenuScreen extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        return {
+            header: () => null
+        }
+    }
+
     checkLoggedIn = async () => {
         try {
             const value = await AsyncStorage.getItem('jwt');
@@ -32,20 +38,22 @@ export default class MenuScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Header name="Vent" />
-                <Button onPress={() => {
-                    this.props.navigation.navigate('Login');
-                    this.componentWillUnmount();
-                }}
-                title="Log in" margin={10} />
+            <ImageBackground source={{uri: 'https://hdwallsource.com/img/2014/9/gradient-26041-26726-hd-wallpapers.jpg'}} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.container}>
+                    <Header name="Vent" />
+                    <Button onPress={() => {
+                        this.props.navigation.navigate('Login');
+                        this.componentWillUnmount();
+                    }}
+                    title="Log in" margin={10} />
 
-                <Button onPress={() => {
-                    this.props.navigation.navigate('Register');
-                    this.componentWillUnmount();
-                }}
-                title="Register" />
-            </View>
+                    <Button onPress={() => {
+                        this.props.navigation.navigate('Register');
+                        this.componentWillUnmount();
+                    }}
+                    title="Register" />
+                </View>
+            </ImageBackground>
         );
     }
 }
@@ -53,14 +61,16 @@ export default class MenuScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#051e47',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
+        marginTop: 20,
+        paddingTop: 130
     },
     header: {
-        fontSize: 42,
+        fontSize: 96,
         color: "white",
-        fontStyle: "italic",
+        fontWeight: "bold",
         fontFamily: "Avenir",
+        textAlign: 'center'
     }
 });

@@ -24,6 +24,10 @@ import * as config from '../config';
 }*/
 
 export default class HomeScreen extends Component {
+    static navigationOptions = {
+        header: null
+    } 
+
     constructor() {
         super();
         this.state = {

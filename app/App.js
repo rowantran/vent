@@ -13,8 +13,18 @@ const RootStack = createStackNavigator(
     {
         Home: HomeScreen,
         Menu: MenuScreen,
-        Login: LoginScreen,
-        Register: RegisterScreen,
+        Login: {
+            screen: LoginScreen,
+            navigationOptions: () => ({
+                title: `Log in`
+            }),
+        },
+        Register: {
+            screen: RegisterScreen,
+            navigationOptions: () => ({
+                title: `Register`
+            }),
+        },
         Questionnaire: QuestionnaireScreen,
         Chat: ChatScreen 
     },
